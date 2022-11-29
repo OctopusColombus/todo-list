@@ -2,15 +2,11 @@ package services;
 
 import activity.dto.GeneralRequest;
 import activity.entity.Activity;
-import activity.entity.ActivityGroup;
 import activity.repository.ActivityRepository;
-import activity.services.ActivityGroupService;
 import activity.services.ActivityService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
