@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <statusListener class="ch.qos.logback.core.status.NopStatusListener" />
+
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <layout>
+            <Pattern>%d{yyyy-MMM-dd  HH:mm:ss.SSS} %highlight(%-5level) [%thread] [app_name=TODO-LIST] [%-40.40logger] - %msg %n</Pattern>
+        </layout>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="console" />
+    </root>
+
+    <logger name="activity" level="DEBUG" additivity="false">
+        <appender-ref ref="console" />
+    </logger>
+
+    <logger name="activity.util" level="TRACE"/>
+</configuration>
