@@ -9,8 +9,8 @@
         <version>2.6.4</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.project.contact</groupId>
-    <artifactId>ContactProject</artifactId>
+    <groupId>com.project.activity</groupId>
+    <artifactId>todo-list</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <name>spring</name>
     <description>Demo project for Spring Boot</description>
@@ -37,7 +37,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <scope>runtime</scope>
+            <version>8.0.30</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -78,4 +78,16 @@
         </dependency>
     </dependencies>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <finalName>todo-list</finalName>
+                    <mainClass>activity.Application</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
