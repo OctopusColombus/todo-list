@@ -3,7 +3,7 @@
  *
  * Version 1.0.0
  *
- * This class is the entity mapping for activity table
+ * This class is the entity mapping for todos table
  *
  * Created by Muhammad Isro Prihandoyo
  */

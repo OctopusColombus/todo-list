@@ -3,7 +3,7 @@
  *
  * Version 1.0.0
  *
- * This class is the entity mapping for activity_group table
+ * This class is the entity mapping for activities table
  *
  * Created by Muhammad Isro Prihandoyo
  */

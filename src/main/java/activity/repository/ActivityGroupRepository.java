@@ -17,14 +17,14 @@ import java.util.List;
 
 public interface ActivityGroupRepository extends JpaRepository<ActivityGroup, Long> {
     //Query to get only one activity by ID
-    @Query(value = "SELECT * FROM activity_group WHERE id = :id", nativeQuery = true)
+    @Query(value = "SELECT * FROM activities WHERE id = :id", nativeQuery = true)
     ActivityGroup findByActivityId(@Param("id") Long id);
 
     //Query to get activities by Email
-    @Query(value = "SELECT * FROM activity_group WHERE email = :email ORDER BY updated_date LIMIT 1000", nativeQuery = true)
+    @Query(value = "SELECT * FROM activities WHERE email = :email ORDER BY updated_date LIMIT 1000", nativeQuery = true)
     List<ActivityGroup> findByEmail(@Param("email") String email);
 
     //Query to get all activities
-    @Query(value = "SELECT * FROM activity_group ORDER BY updated_date LIMIT 1000", nativeQuery = true)
+    @Query(value = "SELECT * FROM activities ORDER BY updated_date LIMIT 1000", nativeQuery = true)
     List<ActivityGroup> findAllActivity();
 }
