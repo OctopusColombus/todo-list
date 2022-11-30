@@ -26,7 +26,7 @@ import javax.persistence.Table;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "activity")
+@Table(name = "todos")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
