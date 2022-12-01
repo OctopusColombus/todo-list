@@ -20,8 +20,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -50,6 +52,7 @@ public class ActivityService {
             log.info("Find All");
             activities = activityRepository.findAll();
         }
+        log.info("Activity Response {}", activities);
 
         ActivityGroupResponse activityGroupResponse = ActivityGroupResponse.builder()
                 .status(SUCCESS)
@@ -66,12 +69,13 @@ public class ActivityService {
         String message = StringUtils.join(NOT_FOUND_MESSAGE, id, StringUtils.SPACE, NOT_FOUND_STATUS);
         HttpStatus httpStatus = HttpStatus.NOT_FOUND;
 
-        Activity activity = activityRepository.findItemById(id);
+        Activity activity = Activity.builder().build();
 
-        if (activity != null) {
+        if (activityRepository.existsById(id)) {
             status = SUCCESS;
             message = SUCCESS;
             httpStatus = HttpStatus.OK;
+            activity = activityRepository.findItemById(id);
         }
 
         return new ResponseEntity<>(ActivityGroupResponse.builder()
@@ -85,7 +89,7 @@ public class ActivityService {
         log.info("Create new Todo Item");
         String status = SUCCESS;
         String message = SUCCESS;
-        HttpStatus httpStatus = HttpStatus.OK;
+        HttpStatus httpStatus = HttpStatus.CREATED;
         LocalDateTime now  = LocalDateTime.now();
 
         Activity activity = new Activity();
@@ -117,8 +121,8 @@ public class ActivityService {
         activity = Activity.builder()
                 .activityGroupId(request.getActivityGroupId())
                 .title(request.getTitle())
-                .isActive(Boolean.FALSE)
-                .priority(request.getPriority())
+                .isActive(Boolean.TRUE)
+                .priority(request.getPriority() != null ? request.getPriority() : "very-high")
                 .createdDate(now)
                 .updatedDate(now)
                 .build();
@@ -196,6 +200,7 @@ public class ActivityService {
         return new ResponseEntity<>(ActivityGroupResponse.builder()
                 .status(status)
                 .message(message)
+                .data(Activity.builder().build())
                 .build(), httpStatus);
     }
 }

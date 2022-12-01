@@ -72,15 +72,14 @@ public class ActivityGroupService {
         String message = StringUtils.join(NOT_FOUND_MESSAGE, id, StringUtils.SPACE, NOT_FOUND_STATUS);
         HttpStatus httpStatus = HttpStatus.NOT_FOUND;
 
-        ActivityGroup activityGroup = activityGroupRepository.findByActivityId(id);
+        ActivityGroup activityGroup = ActivityGroup.builder().build();
 
         //check If Id exist and response not null
-        if (activityGroup != null) {
+        if (activityGroupRepository.existsById(id)) {
             status = SUCCESS;
             message = SUCCESS;
-            activityGroup.setUpdatedDate(null);
-            activityGroup.setEmail(null);
             httpStatus = HttpStatus.OK;
+            activityGroup = activityGroupRepository.findByActivityId(id);
         }
 
         return new ResponseEntity<>(ActivityGroupResponse.builder()
@@ -102,7 +101,7 @@ public class ActivityGroupService {
         if (StringUtils.isNotEmpty(request.getTitle())) {
             status = SUCCESS;
             message = SUCCESS;
-            httpStatus = HttpStatus.OK;
+            httpStatus = HttpStatus.CREATED;
             activityGroup = ActivityGroup.builder()
                     .title(request.getTitle())
                     .email(request.getEmail())
@@ -180,6 +179,7 @@ public class ActivityGroupService {
         return new ResponseEntity<>(ActivityGroupResponse.builder()
                 .status(status)
                 .message(message)
+                .data(ActivityGroup.builder().build())
                 .build(), httpStatus);
     }
 }
