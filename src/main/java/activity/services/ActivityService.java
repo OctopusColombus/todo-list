@@ -20,10 +20,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -90,9 +88,8 @@ public class ActivityService {
         String status = SUCCESS;
         String message = SUCCESS;
         HttpStatus httpStatus = HttpStatus.CREATED;
-        LocalDateTime now  = LocalDateTime.now();
 
-        Activity activity = new Activity();
+        Activity activity = Activity.builder().build();
 
         if (request.getActivityGroupId() == null) {
             status = BAD_REQUEST_STATUS;
@@ -117,6 +114,7 @@ public class ActivityService {
                     .message(message)
                     .build(), httpStatus);
         }
+        LocalDateTime now  = LocalDateTime.now();
 
         activity = Activity.builder()
                 .activityGroupId(request.getActivityGroupId())

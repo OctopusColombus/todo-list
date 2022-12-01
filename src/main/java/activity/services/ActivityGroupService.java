@@ -95,10 +95,10 @@ public class ActivityGroupService {
         String message = BAD_REQUEST_MESSAGE;
         HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
 
-        LocalDateTime now  = LocalDateTime.now();
-        ActivityGroup activityGroup = new ActivityGroup();
+        ActivityGroup activityGroup = ActivityGroup.builder().build();
 
         if (StringUtils.isNotEmpty(request.getTitle())) {
+            LocalDateTime now  = LocalDateTime.now();
             status = SUCCESS;
             message = SUCCESS;
             httpStatus = HttpStatus.CREATED;
@@ -124,7 +124,6 @@ public class ActivityGroupService {
         String status = NOT_FOUND_STATUS;
         String message = StringUtils.join(NOT_FOUND_MESSAGE, id, StringUtils.SPACE, NOT_FOUND_STATUS);
         HttpStatus httpStatus = HttpStatus.NOT_FOUND;
-        LocalDateTime now  = LocalDateTime.now();
 
         ActivityGroup activityGroup = ActivityGroup.builder().build();
 
@@ -141,6 +140,7 @@ public class ActivityGroupService {
         }
 
         if (activityGroupRepository.existsById(id)) {
+            LocalDateTime now  = LocalDateTime.now();
             status = SUCCESS;
             message = SUCCESS;
             httpStatus = HttpStatus.OK;
